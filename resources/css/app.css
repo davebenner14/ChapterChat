@@ -1,0 +1,11 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+[x-cloak] {
+    display: none;
+}
+
+body {
+    background-color: lightblue;
+}
