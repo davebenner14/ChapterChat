@@ -22,64 +22,53 @@ Note that setting up Laravel with Jetstream will provide features like login, re
 
 ## Getting Started 🚀
 
-\```bash
+To get started with this project, follow these steps:
 
-# Initialize a new Laravel project:
+`composer create-project --prefer-dist laravel/laravel <project name>`
 
-composer create-project --prefer-dist laravel/laravel <project name>
+#Navigate into the project folder:
 
-# Navigate into the project folder:
+`cd <project name>`
 
-cd <project name>
+Install Laravel Jetstream:
 
-# Install Laravel Jetstream:
+`composer require laravel/jetstream`
 
-composer require laravel/jetstream
+Install Livewire with teams:
 
-# Install Livewire with teams:
+`php artisan jetstream:install livewire --teams`
 
-php artisan jetstream:install livewire --teams
+Migrate the database:
 
-# Migrate the database:
+`php artisan migrate`
 
-php artisan migrate
+Install and compile front-end dependencies:
 
-# Install and compile front-end dependencies:
+`npm install && npm run dev`
 
-npm install && npm run dev
+Serve the application:
 
-# Serve the application:
-
-php artisan serve
-\```
+`php artisan serve`
 
 Then, visit your application at [http://localhost:8000](http://localhost:8000)
 
 ## Models 📚
 
-\```bash
+Create a model:
 
-# Create a model:
-
-php artisan make:model <ModelName> -m
-\```
+`php artisan make:model <ModelName> -m`
 
 Navigate to the newly created migrations file located in `database/migrations` and define your tables and fields.
 
-\```bash
+Run the migration:
 
-# Run the migration:
-
-php artisan migrate
-\```
+`php artisan migrate`
 
 ## Controllers 🎛️
 
 Controllers are responsible for handling the logic of your application. You can create a controller using the following command:
 
-\```bash
-php artisan make:controller <ControllerName>
-\```
+`php artisan make:controller <ControllerName>`
 
 Inside the controller, you can define methods that handle requests to various routes. For instance, you might have a show method that displays a specific book.
 
