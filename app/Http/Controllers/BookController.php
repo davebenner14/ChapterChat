@@ -15,11 +15,17 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Book::all();
-
-        return view('books.index', compact('books'));
+        $books = Book::with('reviews')->get();
+    
+        // Calculate average rating for each book
+        foreach ($books as $book) {
+            $averageRating = $book->reviews->avg('rating');
+            $book->averageRating = $averageRating;
+        }
+    
+        return view('books.index', ['books' => $books]);
     }
-
+    
     public function create()
     {
         return view('books.create');

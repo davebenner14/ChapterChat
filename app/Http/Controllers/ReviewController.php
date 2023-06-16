@@ -55,13 +55,15 @@ class ReviewController extends Controller
         // Code to display the review details
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Review $review)
-    {
-        // Code to display the form for editing the review
-    }
+ /**
+ * Show the form for editing the specified resource.
+ */
+public function edit(Review $review)
+{
+    $book = $review->book; // you can access the book associated with the review like this
+    return view('reviews.edit', compact('review', 'book'));
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -72,14 +74,14 @@ class ReviewController extends Controller
             'rating' => 'required|integer|min:1|max:5',
             'review' => 'required|string',
         ]);
-
+    
         // Update the review
         $review->rating = $request->input('rating');
         $review->review = $request->input('review');
         $review->save();
-
-        // Redirect to the review's show page
-        return redirect()->route('reviews.show', $review->id);
+    
+        // Redirect to the book's show page
+        return redirect()->route('books.show', $review->book_id);
     }
 
     /**
@@ -87,10 +89,19 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
+        // Get the book's id before deleting the review
+        $bookId = $review->book_id;
+    
         // Delete the review
         $review->delete();
-
-        // Redirect to the index page or book's show page
-        return redirect()->route('reviews.index');
+    
+        // Redirect to the book's show page
+        return redirect()->route('books.show', $bookId);
     }
+    public function confirmDelete(Review $review)
+{
+    return view('reviews.delete', compact('review'));
+}
+
+    
 }

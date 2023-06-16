@@ -11,14 +11,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('build/assets/app-33ccd2ce.css') }}" rel="stylesheet">
+{{-- 
+    <!-- Animation Styles -->
+    <link href="{{ asset('css/book-animation.css') }}" rel="stylesheet"> --}}
 
     <!-- Font Awesome for star icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body class="font-sans antialiased bg-blue-500 text-white" x-data="{ isOpen: false }">
     <nav class="bg-white p-6 mb-8">
         <div class="container mx-auto flex justify-between items-center">
-            <a class="text-2xl font-bold text-gray-900" href="{{ url('/') }}">{{ config('app.name', 'Chapter Chat') }}</a>
+            <a class="text-2xl font-bold text-gray-900" href="{{ url('/') }}">Chapter Chat</a>
+
 
             <div class="flex items-center space-x-4">
                 @auth
@@ -49,8 +54,48 @@
 
     <!-- Scripts -->
     <script src="{{ asset('build/assets/app-f1c6c2af.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var stars = document.querySelectorAll('.star-rating .fa-star');
+            var ratingInput = document.querySelector('input.rating-value');
     
-    <!-- jQuery for star interactions -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</body>
-</html>
+            stars.forEach(function(star) {
+                // Handle click events on stars
+                star.addEventListener('click', function() {
+                    var rating = parseInt(this.getAttribute('data-rating'));
+                    ratingInput.value = rating; // Set rating value in the form
+    
+                    // Highlight the stars up to the one that was clicked
+                    stars.forEach(function(innerStar, index) {
+                        innerStar.classList.remove('selected');
+                        if (index < rating) {
+                            innerStar.classList.add('selected');
+                        }
+                    });
+                });
+    
+                // Handle mouseover events on stars
+                star.addEventListener('mouseover', function() {
+                    var onStar = parseInt(this.getAttribute('data-rating'));
+                    stars.forEach(function(star, index) {
+                        if (index < onStar) {
+                            star.classList.add('selected');
+                        } else {
+                            star.classList.remove('selected');
+                        }
+                    });
+                });
+    
+                // Handle mouseout events on stars
+                star.addEventListener('mouseout', function() {
+                    stars.forEach(function(star, index) {
+                        star.classList.remove('selected');
+                        if (index < ratingInput.value) {
+                            star.classList.add('selected');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    

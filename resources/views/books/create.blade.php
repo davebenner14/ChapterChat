@@ -22,8 +22,8 @@
             <textarea name="summary" id="summary" rows="5" class="w-full px-3 py-2 border rounded text-gray-800"></textarea>
         </div>
         <div>
-            <button type="submit" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded">Save Book</button>
-            <a href="{{ route('books.index') }}" class="ml-2 text-gray-600">Cancel</a>
+            <button type="submit" style="display: inline-block; background-color: #32CD32; color: white; padding: 8px 16px; border-radius: 4px; text-align: center; text-decoration: none; font-weight: 600;">Save Book</button>
+            <a href="{{ route('books.index') }}" style="display: inline-block; background-color: #808080; color: white; padding: 8px 16px; border-radius: 4px; text-align: center; text-decoration: none; font-weight: 600; margin-left: 0.5rem;">Cancel</a>
         </div>
     </form>
 </div>

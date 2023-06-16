@@ -28,7 +28,7 @@ To get started with this project, follow these steps:
 composer create-project --prefer-dist laravel/laravel <project name>
 ```
 
-#Navigate into the project folder:
+Navigate into the project folder:
 
 ```
 cd <project name>
