@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Chapter Chat') }}</title>
+    <title>Chapter Chat</title>
 
     <!-- Styles -->
     <link href="{{ asset('build/assets/app-33ccd2ce.css') }}" rel="stylesheet">
