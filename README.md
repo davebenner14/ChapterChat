@@ -6,6 +6,10 @@ This project was developed as a practice application to improve skills in variou
 
 Note that setting up Laravel with Jetstream will provide features like login, registration, email verification, two-factor authentication, session management, API support via Laravel Sanctum, and optional team management.
 
+## Live Website 🌐
+
+### [Chapter Chat](https://yy6ch72tjzlggo2633s7cqez7i0utocc.lambda-url.us-east-2.on.aws/)
+
 ## Developer 🤝
 
 ### 🧑‍💻 [David Benner](https://github.com/davebenner14)
@@ -82,6 +86,27 @@ Run the migration:
 php artisan migrate
 ```
 
+Here is a simple example:
+
+```
+class Book extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['title', 'author', 'summary', '_token'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+}
+```
+
 ## Controllers 🎛️
 
 Controllers are responsible for handling the logic of your application. You can create a controller using the following command:
@@ -92,11 +117,48 @@ php artisan make:controller <ControllerName>
 
 Inside the controller, you can define methods that handle requests to various routes. For instance, you might have a show method that displays a specific book.
 
+Here is a simple example:
+
+```
+class BookController extends Controller
+{
+public function create()
+{
+return view('books.create');
+}
+}
+```
+
 ## Views 🖼️
 
 Views are responsible for generating the user interface of your application. Views live in the resources/views directory and are typically created using the Blade templating language.
 
 You can create a new view by creating a new .blade.php file in the resources/views directory. For instance, you might create a show.blade.php view to display a specific book.
+
+Here is a simple example:
+
+```
+@extends('layouts.app')
+
+@section('content')
+
+<div>
+    <h1>Add New Book</h1>
+    <form action="{{ route('books.store') }}" method="post">
+        @csrf
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author">
+
+        <input type="submit" value="Add Book">
+    </form>
+</div>
+
+@endsection
+
+```
 
 ## Going Forward 🚀
 
