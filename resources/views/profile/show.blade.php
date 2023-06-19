@@ -4,7 +4,7 @@
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <h2 class="font-semibold text-2xl mb-4 text-gray-800">{{ $user->name }}</h2>
+                <h2 class="font-semibold text-2xl mb-4 text-gray-800">{{ $user->name }}'s Profile Page</h2>
                 <p class="text-gray-800 mb-4">Email: {{ $user->email }}</p>
 
                 <p class="font-semibold text-gray-800">Bio:</p>
@@ -30,11 +30,6 @@
                     @endforeach
                 </div>
                 
-                
-                
-                
-                
-
                 <div class="mt-8">
                     <h3 class="font-semibold text-lg mb-4 text-gray-800">Reviews ({{ $reviews->count() }})</h3>
                     @foreach($reviews as $review)

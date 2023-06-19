@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Book;
@@ -8,100 +9,100 @@ use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+public function __construct()
+{
+$this->middleware('auth');
+}
 
-    public function index()
-    {
-        $books = Book::with('reviews')->get();
-    
-        // Calculate average rating for each book
-        foreach ($books as $book) {
-            $averageRating = $book->reviews->avg('rating');
-            $book->averageRating = $averageRating;
-        }
-    
-        return view('books.index', ['books' => $books]);
-    }
-    
-    public function create()
-    {
-        return view('books.create');
-    }
+public function index()
+{
+$books = Book::with('reviews')->get();
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'genre' => 'required',
-            'summary' => 'required',
-        ]);
+// Calculate average rating for each book
+foreach ($books as $book) {
+$averageRating = $book->reviews->avg('rating');
+$book->averageRating = $averageRating;
+}
 
-        $book = new Book();
-        $book->title = $request->input('title');
-        $book->author = $request->input('author');
-        $book->genre = $request->input('genre');
-        $book->summary = $request->input('summary');
-        $book->team_id = Auth::user()->currentTeam->id;
-        $book->user_id = Auth::id();
-        $book->save();
+return view('books.index', ['books' => $books]);
+}
 
-        return redirect()->route('books.index');
-    }
+public function create()
+{
+return view('books.create');
+}
 
-    public function show(Book $book)
-    {
-        $this->authorize('view', $book);
-        
-        $book->load('reviews'); // Load the reviews of the book
+public function store(Request $request)
+{
+$request->validate([
+'title' => 'required',
+'author' => 'required',
+'genre' => 'required',
+'summary' => 'required',
+]);
 
-        // Calculate average rating
-        $averageRating = $book->reviews->avg('rating');
+$book = new Book();
+$book->title = $request->input('title');
+$book->author = $request->input('author');
+$book->genre = $request->input('genre');
+$book->summary = $request->input('summary');
+$book->team_id = Auth::user()->currentTeam->id;
+$book->user_id = Auth::id();
+$book->save();
 
-        return view('books.show', compact('book', 'averageRating'));
-    }
+return redirect()->route('books.index');
+}
 
-    public function edit(Book $book)
-    {
-        $this->authorize('update', $book);
+public function show(Book $book)
+{
+// Allow any user to view the book
 
-        return view('books.edit', compact('book'));
-    }
+$book->load('reviews'); // Load the reviews of the book
 
-    public function update(Request $request, Book $book)
-    {
-        $this->authorize('update', $book);
+// Calculate average rating
+$averageRating = $book->reviews->avg('rating');
 
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'genre' => 'required',
-            'summary' => 'required',
-        ]);
+return view('books.show', compact('book', 'averageRating'));
+}
 
-        $book->title = $request->input('title');
-        $book->author = $request->input('author');
-        $book->genre = $request->input('genre');
-        $book->summary = $request->input('summary');
-        $book->save();
+public function edit(Book $book)
+{
+$this->authorize('update', $book);
 
-        return redirect()->route('books.show', $book);
-    }
+return view('books.edit', compact('book'));
+}
 
-    public function destroy(Book $book)
-    {
-        $this->authorize('delete', $book);
+public function update(Request $request, Book $book)
+{
+$this->authorize('update', $book);
 
-        $book->delete();
+$request->validate([
+'title' => 'required',
+'author' => 'required',
+'genre' => 'required',
+'summary' => 'required',
+]);
 
-        return redirect()->route('books.index');
-    }
+$book->title = $request->input('title');
+$book->author = $request->input('author');
+$book->genre = $request->input('genre');
+$book->summary = $request->input('summary');
+$book->save();
 
-    public function confirmDelete(Book $book)
-    {
-        return view('books.delete', compact('book'));
-    }
+return redirect()->route('books.show', $book);
+}
+
+public function destroy(Book $book)
+{
+$this->authorize('delete', $book);
+
+$book->delete();
+
+return redirect()->route('books.index');
+}
+
+public function confirmDelete(Book $book)
+{
+return view('books.delete', compact('book'));
+}
 }

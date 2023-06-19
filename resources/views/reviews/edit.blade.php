@@ -5,7 +5,7 @@
         <h1 class="text-4xl font-semibold mb-4">Edit Review</h1>
         <form action="{{ route('reviews.update', ['review' => $review->id]) }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('PATCH') <!-- Update the method to PATCH -->
             <div class="mb-4">
                 <label for="rating" class="block text-gray-700 text-sm font-bold mb-2">Rating:</label>
                 <div class="star-rating">

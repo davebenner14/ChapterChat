@@ -42,12 +42,14 @@
                 </div>
             </dl>
         </div>
+        @can('update', $book)
         <div class="px-4 py-3 sm:px-6">
             <a href="{{ route('books.edit', $book) }}" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded">Edit</a>
             <a href="{{ route('books.confirm-delete', $book) }}" class="bg-red-500 text-white font-semibold px-4 py-2 rounded">Delete</a>
         </div>
+        @endcan
     </div>
-    
+
     <!-- Reviews Section -->
     <div class="border-t border-gray-200 mt-8">
         <h2 class="text-2xl font-semibold mb-4">Reviews</h2>
@@ -61,15 +63,18 @@
                     <p class="text-gray-800">{{ $review->review }}</p>
                     <p class="text-sm text-gray-500">Reviewer: {{ $review->user->name }}</p>
                     <p class="text-sm text-gray-500">Posted on: {{ $review->created_at->format('F d, Y') }}</p>
-    
-                    @if(auth()->user()->id == $review->user_id)
+
+                    @can('update', $review)
                         <a href="{{ route('reviews.edit', ['review' => $review->id]) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">Edit</a>
-    
+
                         <a href="{{ route('reviews.confirm-delete', ['review' => $review->id]) }}" class="inline-block bg-red-500 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded">Delete</a>
-                    @endif
+                    @elseif(auth()->user()->id == $review->user_id)
+                        <a href="{{ route('reviews.edit', ['review' => $review->id]) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">Edit</a>
+
+                        <a href="{{ route('reviews.confirm-delete', ['review' => $review->id]) }}" class="inline-block bg-red-500 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded">Delete</a>
+                    @endcan
                 </div>
             </div>
         @endforeach
     </div>
-    @endsection
-    
+@endsection

@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function show()
     {
-        $user = auth()->user();
-        $profileData = $user->profile ?? (object) [
-            'bio' => 'No bio available',
-            'location' => 'No location available',
+        $user = Auth::user();
+        $profileData = (object) [
+            'bio' => $user->bio ?? 'No bio available',
+            'location' => $user->location ?? 'No location available',
         ];
 
         $books = $user->books; // Assuming you have defined the relationship correctly
@@ -22,10 +23,10 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        $user = auth()->user();
-        $profileData = $user->profile ?? (object) [
-            'bio' => 'No bio available',
-            'location' => 'No location available',
+        $user = Auth::user();
+        $profileData = (object) [
+            'bio' => $user->bio ?? 'No bio available',
+            'location' => $user->location ?? 'No location available',
         ];
 
         return view('profile.edit', compact('user', 'profileData'));
@@ -33,7 +34,7 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Validate the form data
         $validatedData = $request->validate([
@@ -45,15 +46,9 @@ class ProfileController extends Controller
         // Update the user's profile data
         $user->update([
             'name' => $validatedData['name'],
+            'bio' => $validatedData['bio'],
+            'location' => $validatedData['location'],
         ]);
-
-        // Update the profile data if available
-        if ($user->profile) {
-            $user->profile->update([
-                'bio' => $validatedData['bio'],
-                'location' => $validatedData['location'],
-            ]);
-        }
 
         // Update the profileData variable with the updated data
         $profileData = (object) [
