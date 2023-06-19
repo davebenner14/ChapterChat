@@ -24,6 +24,11 @@ Note that setting up Laravel with Jetstream will provide features like login, re
 -   [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 -   [Tailwind CSS](https://tailwindcss.com/)
 
+## Screenshots 📸
+
+![Screenshot 1](Screenshots/Screenshot1.png)
+![Screenshot 2](Screenshots/Screenshot2.png)
+
 ## Getting Started 🚀
 
 To get started with this project, follow these steps:
