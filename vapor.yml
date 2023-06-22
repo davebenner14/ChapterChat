@@ -8,5 +8,7 @@ environments:
     build:
       - "composer install --no-dev"
       - "php artisan event:cache"
-    database: my-test-database
+    deploy:
+      - "php artisan migrate --force"
+    database: ChapterChat
     # - 'npm ci && npm run build && rm -rf node_modules'

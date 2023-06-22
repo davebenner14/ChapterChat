@@ -19,11 +19,11 @@ Route::middleware([
         return redirect('/');
     })->name('dashboard');
 
-    // Individual book route
-    Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
-
     // Resourceful book routes
     Route::resource('books', BookController::class)->except(['show']);
+
+    // Individual book route
+    Route::get('/books/{book}', [BookController::class, 'show'])->where('book', '[0-9]+')->name('books.show');
 
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
