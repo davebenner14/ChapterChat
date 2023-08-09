@@ -8,7 +8,7 @@ Note that setting up Laravel with Jetstream will provide features like login, re
 
 ## Live Website 🌐
 
-### [Chapter Chat](https://yy6ch72tjzlggo2633s7cqez7i0utocc.lambda-url.us-east-2.on.aws/)
+### [Chapter Chat](https://yy6ch72tjzlggo2633s7cqez7i0utocc.lambda-url.us-east-2.on.aws/) - This project is no longer live.
 
 ## Developer 🤝
 
