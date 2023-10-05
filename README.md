@@ -4,8 +4,6 @@ Chapter Chat is a book review web application that allows users to create, read,
 
 This project was developed as a practice application to improve skills in various web technologies like Laravel, Jetstream, PHP, JavaScript, Blade, and Tailwind CSS. The application was developed over five days, from June 12 to June 16, 2023.
 
-Note that setting up Laravel with Jetstream will provide features like login, registration, email verification, two-factor authentication, session management, API support via Laravel Sanctum, and optional team management.
-
 ## Live Website 🌐
 
 ### [Chapter Chat](https://yy6ch72tjzlggo2633s7cqez7i0utocc.lambda-url.us-east-2.on.aws/) - This project is no longer live.
